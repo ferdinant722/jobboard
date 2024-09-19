@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply for Job</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Roboto", sans-serif;
+        color: #343a40;
+      }
+      .header {
+        background-color: #343a40;
+        color: white;
+        padding: 40px 0;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+      }
+      .container {
+        margin-top: 40px;
+      }
+      .form-container {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+      .form-container h2 {
+        margin-bottom: 30px;
+        font-size: 1.75rem;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+        opacity: 0.9;
+      }
+      .job-list {
+        margin-top: 40px;
+      }
+      .list-group-item {
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .list-group-item a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+      .list-group-item a:hover {
+        text-decoration: underline;
+      }
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Apply for Job</h1>
+    </header>
+
+    <div class="container">
+      <div class="form-container">
+        <h2 class="text-center">Apply for {{ job.title }}</h2>
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">{{ form.as_p }}</div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Submit Application
+          </button>
+        </form>
+      </div>
+
+      <h3 class="job-list">Available Jobs</h3>
+      <ul class="list-group">
+        {% for available_job in available_jobs %}
+        <li class="list-group-item">
+          <a href="{% url 'jobs:job_detail' available_job.id %}">
+            {{ available_job.title }}
+          </a>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No available jobs at the moment.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!-- templates/jobs/user_job_applications.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>My Job Applications</h1>
+    </header>
+
+    <div class="container mt-4 content">
+        <h2>Your Job Applications</h2>
+        {% if applications %}
+            <ul class="list-group">
+                {% for application in applications %}
+                    <li class="list-group-item">
+                        <strong>Job Title:</strong> {{ application.job.title }}<br>
+                        <strong>Applied On:</strong> {{ application.created_at }}<br>
+                        <!-- Add more details as needed -->
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No applications found.</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 JobBoard. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
